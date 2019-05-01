@@ -1,4 +1,4 @@
-package it.jamart.maniek.garden.watering.model;
+package it.jamart.maniek.garden.watering.pintypes;
 
 import com.pi4j.io.gpio.*;
 import it.jamart.maniek.garden.watering.enums.WateringPinNames;

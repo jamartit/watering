@@ -5,6 +5,8 @@ import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 import it.jamart.maniek.garden.watering.enums.WateringPinNames;
 import it.jamart.maniek.garden.watering.model.*;
+import it.jamart.maniek.garden.watering.pintypes.DigitalInputPin;
+import it.jamart.maniek.garden.watering.pintypes.DigitalOutputPin;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +29,9 @@ public class Initializer implements CommandLineRunner {
         systemContainer.setRainDetector(new RainDetector(new DigitalInputPin(RaspiPin.GPIO_01, PinPullResistance.PULL_DOWN, WateringPinNames.RAIN_DETECTOR)));
         systemContainer.setWaterFlowDetector(new WaterFlowDetector(new DigitalInputPin(RaspiPin.GPIO_00, PinPullResistance.PULL_DOWN, WateringPinNames.WATER_FLOW)));
 
-        systemContainer.setAllDevices(new ExternalDeviceSwitch(new DigitalOutputPin(RaspiPin.GPIO_02, PinState.HIGH, WateringPinNames.CONTROL_LIGHT)));
+        systemContainer.setAllDevices(
+                new ExternalDeviceSwitch(new DigitalOutputPin(RaspiPin.GPIO_02, PinState.HIGH, WateringPinNames.CONTROL_LIGHT)),
+                new ExternalDeviceSwitch(new DigitalOutputPin(RaspiPin.GPIO_03, PinState.HIGH, WateringPinNames.VALVES_POWER))
+        );
     }
 }

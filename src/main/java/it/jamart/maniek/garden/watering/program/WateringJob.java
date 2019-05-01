@@ -33,7 +33,7 @@ public class WateringJob implements Runnable {
 
     public void start(String name) {
         worker = new Thread(this);
-        this.jobName = jobName;
+        this.jobName = name;
         worker.start();
     }
 
@@ -59,7 +59,6 @@ public class WateringJob implements Runnable {
         running.set(true);
 
         if(!disabled.get()) {
-            log.info("start watering " + jobName);
             try {
                 executeSection(WateringPinNames.SECTION_1);
                 executeSection(WateringPinNames.SECTION_2);
@@ -74,16 +73,13 @@ public class WateringJob implements Runnable {
                 log.warn("abort default watering " + jobName + " - " + e);
             }
             wateringController.clearAll();
-            log.info("finish default watering " + jobName);
         } else {
             log.info("watering disabled");
         }
-
         running.set(false);
     }
 
     private void executeSection(WateringPinNames sectionName) throws InterruptedException {
-        log.info("execute watering for : " + jobName + " - " + sectionName.getName());
         WateringSection section = wateringController.resolveSection(sectionName);
         if (section != null && wateringController.turnOnSection(section)) {
             Thread.sleep(section.getActiveMinutes() * 100);

@@ -23,7 +23,7 @@ public class SystemContainer {
 
     private WaterFlowDetector waterFlowDetector;
 
-    private List<ExternalDeviceSwitch> externalDevices;
+    private List<ExternalDeviceSwitch> externalDevices = new ArrayList<>();
 
     private SystemContainer() {
     }

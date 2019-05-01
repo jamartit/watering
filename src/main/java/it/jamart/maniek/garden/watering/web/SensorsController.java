@@ -14,19 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class SensorsController {
 
     @GetMapping("/sensor/rain")
-    public String isRainDetected() {
-
+    public boolean isRainDetected() {
         RainDetector rainDetector = SystemContainer.getInstance().getRainDetector();
-        return rainDetector.getPin().getPin().getState().toString();
-
+        return rainDetector.getPin().getPin().isLow();
     }
 
     @GetMapping("/sensor/water-flow")
     public String isWaterFlowDetected() {
-
         WaterFlowDetector waterFlowDetector = SystemContainer.getInstance().getWaterFlowDetector();
         return waterFlowDetector.getPin().getPin().getState().toString();
-
     }
 
 }

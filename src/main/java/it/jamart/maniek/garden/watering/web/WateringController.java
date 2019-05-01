@@ -1,6 +1,7 @@
 package it.jamart.maniek.garden.watering.web;
 
 import it.jamart.maniek.garden.watering.enums.WateringPinNames;
+import it.jamart.maniek.garden.watering.model.ExternalDeviceSwitch;
 import it.jamart.maniek.garden.watering.model.WateringSection;
 import it.jamart.maniek.garden.watering.model.SystemContainer;
 import it.jamart.maniek.garden.watering.program.ScheduledWatering;
@@ -29,6 +30,7 @@ public class WateringController {
         for (WateringSection section : SystemContainer.getInstance().getSectionList()) {
             section.getPin().turnOff();
         }
+        valvePowerOff();
         return true;
     }
 
@@ -176,6 +178,7 @@ public class WateringController {
     public void abortWatering() {
         WateringJob wateringJob = scheduledWatering.getWateringJob();
         wateringJob.interrupt();
+        valvePowerOff();
     }
 
     @GetMapping("/water/disable")
@@ -196,12 +199,29 @@ public class WateringController {
         return "Status: disabled: " + wateringJob.getDisabled().get() + " / running: " + wateringJob.getRunning().get();
     }
 
+    @GetMapping("/water/valve/power-on")
+    public void valvePowerOn() {
+        ExternalDeviceSwitch valvesPower = SystemContainer.getInstance().getExternalDeviceByNameEnum(WateringPinNames.VALVES_POWER);
+        valvesPower.getPin().turnOn();
+    }
 
+    @GetMapping("/water/valve/power-off")
+    public void valvePowerOff() {
+        ExternalDeviceSwitch valvesPower = SystemContainer.getInstance().getExternalDeviceByNameEnum(WateringPinNames.VALVES_POWER);
+        valvesPower.getPin().turnOff();
+    }
+
+    @GetMapping("/water/valve/power-status")
+    public boolean valvePowerStatus() {
+        ExternalDeviceSwitch valvesPower = SystemContainer.getInstance().getExternalDeviceByNameEnum(WateringPinNames.VALVES_POWER);
+        return valvesPower.getPin().isActive();
+    }
 
     public boolean turnOnSection(WateringSection section) {
         clearAll();
         boolean result = false;
         if (section != null) {
+            valvePowerOn();
             section.getPin().turnOn();
             result = true;
         }
@@ -212,6 +232,7 @@ public class WateringController {
         boolean result = false;
         if (section != null) {
             section.getPin().turnOff();
+            valvePowerOff();
             result = true;
         }
         return result;
