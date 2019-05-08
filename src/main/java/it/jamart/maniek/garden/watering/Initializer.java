@@ -7,6 +7,7 @@ import it.jamart.maniek.garden.watering.enums.WateringPinNames;
 import it.jamart.maniek.garden.watering.model.*;
 import it.jamart.maniek.garden.watering.pintypes.DigitalInputPin;
 import it.jamart.maniek.garden.watering.pintypes.DigitalOutputPin;
+import it.jamart.maniek.garden.watering.program.WaterFlowJob;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,10 @@ public class Initializer implements CommandLineRunner {
 
         systemContainer.setAllDevices(
                 new ExternalDeviceSwitch(new DigitalOutputPin(RaspiPin.GPIO_02, PinState.HIGH, WateringPinNames.CONTROL_LIGHT)),
-                new ExternalDeviceSwitch(new DigitalOutputPin(RaspiPin.GPIO_03, PinState.HIGH, WateringPinNames.VALVES_POWER))
+                new ExternalDeviceSwitch(new DigitalOutputPin(RaspiPin.GPIO_04, PinState.HIGH, WateringPinNames.VALVES_POWER))
         );
+
+        WaterFlowJob waterFlowJob = new WaterFlowJob();
+        waterFlowJob.run();
     }
 }

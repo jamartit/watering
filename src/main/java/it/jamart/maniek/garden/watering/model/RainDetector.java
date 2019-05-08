@@ -14,4 +14,8 @@ public class RainDetector {
         this.pin = pin;
     }
 
+    public boolean isRainDetected() {
+        return pin.getPin().isLow();
+    }
+
 }

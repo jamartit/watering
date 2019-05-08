@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>jGarden Wattering</title>
+    <meta name="robots" content="nofollow"/>
+    <meta name="robots" content="noindex"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/js/datatable.js"></script>
+
+</head>
+<body>
+
+
+<div>jGarden Wattering</div>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+            <button id="button-section-1" th:class="'btn ' + (${section1status} ? 'btn-secondary' : 'btn-primary')">Section 1</button>
+        </div>
+        <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+            <button id="button-section-2" th:class="'btn ' + (${section2status} ? 'btn-secondary' : 'btn-primary')">Section 2</button>
+        </div>
+        <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+            <button id="button-section-3" th:class="'btn ' + (${section3status} ? 'btn-secondary' : 'btn-primary')">Section 3</button>
+        </div>
+        <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+            <button id="button-section-4" th:class="'btn ' + (${section4status} ? 'btn-secondary' : 'btn-primary')">Section 4</button>
+        </div>
+        <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+            <button id="button-section-5" th:class="'btn ' + (${section5status} ? 'btn-secondary' : 'btn-primary')">Section 5</button>
+        </div>
+        <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+            <button id="button-section-6" th:class="'btn ' + (${section6status} ? 'btn-secondary' : 'btn-primary')">Section 6</button>
+        </div>
+        <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+            <button id="button-section-7" th:class="'btn ' + (${section7status} ? 'btn-secondary' : 'btn-primary')">Section 7</button>
+        </div>
+        <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+            <button id="button-section-8" th:class="'btn ' + (${section8status} ? 'btn-secondary' : 'btn-primary')">Section 8</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

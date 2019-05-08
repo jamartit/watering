@@ -16,13 +16,13 @@ public class SensorsController {
     @GetMapping("/sensor/rain")
     public boolean isRainDetected() {
         RainDetector rainDetector = SystemContainer.getInstance().getRainDetector();
-        return rainDetector.getPin().getPin().isLow();
+        return rainDetector != null ? rainDetector.getPin().getPin().isLow() : false;
     }
 
     @GetMapping("/sensor/water-flow")
-    public String isWaterFlowDetected() {
+    public boolean isWaterFlowDetected() {
         WaterFlowDetector waterFlowDetector = SystemContainer.getInstance().getWaterFlowDetector();
-        return waterFlowDetector.getPin().getPin().getState().toString();
+        return waterFlowDetector != null ? waterFlowDetector.isWaterFlowing() : false;
     }
 
 }

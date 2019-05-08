@@ -1,6 +1,8 @@
 package it.jamart.maniek.garden.watering.program;
 
 import it.jamart.maniek.garden.watering.enums.WateringPinNames;
+import it.jamart.maniek.garden.watering.model.RainDetector;
+import it.jamart.maniek.garden.watering.model.SystemContainer;
 import it.jamart.maniek.garden.watering.model.WateringSection;
 import it.jamart.maniek.garden.watering.web.WateringController;
 import lombok.Getter;
@@ -81,8 +83,9 @@ public class WateringJob implements Runnable {
 
     private void executeSection(WateringPinNames sectionName) throws InterruptedException {
         WateringSection section = wateringController.resolveSection(sectionName);
-        if (section != null && wateringController.turnOnSection(section)) {
-            Thread.sleep(section.getActiveMinutes() * 100);
+        RainDetector rainDetector = SystemContainer.getInstance().getRainDetector();
+        if (section != null && !rainDetector.isRainDetected() && wateringController.turnOnSection(section)) {
+            Thread.sleep(section.getActiveMinutes() * 1000);
             wateringController.turnOffSection(section);
         }
     }

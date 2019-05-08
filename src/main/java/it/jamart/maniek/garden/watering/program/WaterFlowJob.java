@@ -3,24 +3,40 @@ package it.jamart.maniek.garden.watering.program;
 import it.jamart.maniek.garden.watering.enums.WateringPinNames;
 import it.jamart.maniek.garden.watering.model.ExternalDeviceSwitch;
 import it.jamart.maniek.garden.watering.model.SystemContainer;
-import lombok.Getter;
+import it.jamart.maniek.garden.watering.model.WaterFlowDetector;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Slf4j
 public class WaterFlowJob implements Runnable {
 
-    @Getter
-    private final AtomicBoolean flowing = new AtomicBoolean(false);
-
     @Override
     public void run() {
 
-        while(true) {
-            ExternalDeviceSwitch controlLight = SystemContainer.getInstance().getExternalDeviceByNameEnum(WateringPinNames.CONTROL_LIGHT);
-
+        ExternalDeviceSwitch controlLight = SystemContainer.getInstance().getExternalDeviceByNameEnum(WateringPinNames.CONTROL_LIGHT);
+        WaterFlowDetector waterFlowDetector = SystemContainer.getInstance().getWaterFlowDetector();
+        while (true) {
+            try {
+                if (waterFlowDetector.isWaterFlowing() && !isLightOn(controlLight)) {
+                    turnLightOn(controlLight);
+                } else if (!waterFlowDetector.isWaterFlowing() && isLightOn(controlLight)) {
+                    turnLightOff(controlLight);
+                }
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                log.warn("water flow indicator interrupted");
+            }
         }
+    }
 
+    private boolean isLightOn(ExternalDeviceSwitch controlLight) {
+        return controlLight.getPin().isActive();
+    }
+
+    private void turnLightOn(ExternalDeviceSwitch controlLight) {
+        controlLight.getPin().turnOn();
+    }
+
+    private void turnLightOff(ExternalDeviceSwitch controlLight) {
+        controlLight.getPin().turnOff();
     }
 }
