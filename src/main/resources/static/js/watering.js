@@ -18,7 +18,7 @@ $(document).ready(function () {
     });
 
     $(".sectionBtn").click(function () {
-        executeCommand("/water/toggle/" + this.attr('data-section'));
+        executeCommand("/api/water/toggle/" + $(this).data('section'));
     });
 
     var timer = setInterval(function () {

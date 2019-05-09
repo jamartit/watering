@@ -68,7 +68,7 @@ public class WateringController {
     public void abortWatering() {
         WateringJob wateringJob = scheduledWatering.getWateringJob();
         wateringJob.interrupt();
-        valvePowerOff();
+        clearAll();
     }
 
     @GetMapping("/water/disable")
