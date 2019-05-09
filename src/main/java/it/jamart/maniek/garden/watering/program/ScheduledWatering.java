@@ -1,5 +1,6 @@
 package it.jamart.maniek.garden.watering.program;
 
+import it.jamart.maniek.garden.watering.model.SystemContainer;
 import it.jamart.maniek.garden.watering.web.WateringController;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -16,12 +17,15 @@ public class ScheduledWatering {
     @Autowired
     private WateringController wateringController;
 
+    @Autowired
+    private SystemContainer systemContainer;
+
     @Getter
     private WateringJob wateringJob;
 
     @PostConstruct
     private void init() {
-        wateringJob = new WateringJob(wateringController);
+        wateringJob = new WateringJob(wateringController, systemContainer);
     }
 
     @Scheduled(cron = "0 0 4 * * *")

@@ -8,15 +8,18 @@ import it.jamart.maniek.garden.watering.model.*;
 import it.jamart.maniek.garden.watering.pintypes.DigitalInputPin;
 import it.jamart.maniek.garden.watering.pintypes.DigitalOutputPin;
 import it.jamart.maniek.garden.watering.program.WaterFlowJob;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Initializer implements CommandLineRunner {
 
+    @Autowired
+    private SystemContainer systemContainer;
+
     @Override
     public void run(String... args) {
-        SystemContainer systemContainer = SystemContainer.getInstance();
         systemContainer.setAllSections(
                 new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_21, PinState.HIGH, WateringPinNames.SECTION_1), 10),
                 new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_22, PinState.HIGH, WateringPinNames.SECTION_2), 30),
@@ -35,7 +38,7 @@ public class Initializer implements CommandLineRunner {
                 new ExternalDeviceSwitch(new DigitalOutputPin(RaspiPin.GPIO_04, PinState.HIGH, WateringPinNames.VALVES_POWER))
         );
 
-        WaterFlowJob waterFlowJob = new WaterFlowJob();
+        WaterFlowJob waterFlowJob = new WaterFlowJob(systemContainer);
         waterFlowJob.run();
     }
 }

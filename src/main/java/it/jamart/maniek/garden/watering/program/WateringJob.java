@@ -23,10 +23,13 @@ public class WateringJob implements Runnable {
 
     private WateringController wateringController;
 
+    private SystemContainer systemContainer;
+
     private String jobName;
 
-    public WateringJob(WateringController wateringController) {
+    public WateringJob(WateringController wateringController, SystemContainer systemContainer) {
         this.wateringController = wateringController;
+        this.systemContainer = systemContainer;
     }
 
     public void start() {
@@ -83,7 +86,7 @@ public class WateringJob implements Runnable {
 
     private void executeSection(WateringPinNames sectionName) throws InterruptedException {
         WateringSection section = wateringController.resolveSection(sectionName);
-        RainDetector rainDetector = SystemContainer.getInstance().getRainDetector();
+        RainDetector rainDetector = systemContainer.getRainDetector();
         if (section != null && !rainDetector.isRainDetected() && wateringController.turnOnSection(section)) {
             Thread.sleep(section.getActiveMinutes() * 1000);
             wateringController.turnOffSection(section);

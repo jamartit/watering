@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/js/datatable.js"></script>
+    <script src="/js/watering.js"></script>
 
 </head>
 <body>
@@ -18,32 +18,47 @@
 
 <div>jGarden Wattering</div>
 
-<div class="container-fluid">
+<div class="container-fluid" id="watering-container">
+
+    <div>
+        <div style="padding: 5px;" th:text="'Main watering is currently ' + (${mainwateringstatus} ? 'active' : 'inactive')" />
+        <div style="padding: 5px;" th:text="'Watering is currently ' + (${waterstatus} ? '' : 'not') + ' flowing'" />
+        <div style="padding: 5px;" th:text="'Rain is ' + (${rainstatus} ? '' : 'not') + ' detected'" />
+    </div>
+
+    <div class="row">
+        <div style="padding: 5px;">
+            <button id="button-abort" th:class="'btn btn-danger'">Abort</button>
+        </div>
+        <div style="padding: 5px;">
+            <button id="button-execute" th:class="'btn ' + (${mainwateringstatus} ? 'btn-warning' : 'btn-success')">Execute Main</button>
+        </div>
+    </div>
 
     <div class="row">
         <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
-            <button id="button-section-1" th:class="'btn ' + (${section1status} ? 'btn-secondary' : 'btn-primary')">Section 1</button>
+            <button data-section="section-1" th:class="'sectionBtn  btn ' + (${section1status} ? 'btn-warning' : 'btn-primary')">Section 1</button>
         </div>
         <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
-            <button id="button-section-2" th:class="'btn ' + (${section2status} ? 'btn-secondary' : 'btn-primary')">Section 2</button>
+            <button data-section="section-2" th:class="'sectionBtn  btn ' + (${section2status} ? 'btn-warning' : 'btn-primary')">Section 2</button>
         </div>
         <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
-            <button id="button-section-3" th:class="'btn ' + (${section3status} ? 'btn-secondary' : 'btn-primary')">Section 3</button>
+            <button data-section="section-3" th:class="'sectionBtn  btn ' + (${section3status} ? 'btn-warning' : 'btn-primary')">Section 3</button>
         </div>
         <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
-            <button id="button-section-4" th:class="'btn ' + (${section4status} ? 'btn-secondary' : 'btn-primary')">Section 4</button>
+            <button data-section="section-4" th:class="'sectionBtn  btn ' + (${section4status} ? 'btn-warning' : 'btn-primary')">Section 4</button>
         </div>
         <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
-            <button id="button-section-5" th:class="'btn ' + (${section5status} ? 'btn-secondary' : 'btn-primary')">Section 5</button>
+            <button data-section="section-5" th:class="'sectionBtn  btn ' + (${section5status} ? 'btn-warning' : 'btn-primary')">Section 5</button>
         </div>
         <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
-            <button id="button-section-6" th:class="'btn ' + (${section6status} ? 'btn-secondary' : 'btn-primary')">Section 6</button>
+            <button data-section="section-6" th:class="'sectionBtn  btn ' + (${section6status} ? 'btn-warning' : 'btn-primary')">Section 6</button>
         </div>
         <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
-            <button id="button-section-7" th:class="'btn ' + (${section7status} ? 'btn-secondary' : 'btn-primary')">Section 7</button>
+            <button data-section="section-7" th:class="'sectionBtn  btn ' + (${section7status} ? 'btn-warning' : 'btn-primary')">Section 7</button>
         </div>
         <div style="padding: 5px;" class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
-            <button id="button-section-8" th:class="'btn ' + (${section8status} ? 'btn-secondary' : 'btn-primary')">Section 8</button>
+            <button data-section="section-8" th:class="'sectionBtn  btn ' + (${section8status} ? 'btn-warning' : 'btn-primary')">Section 8</button>
         </div>
     </div>
 </div>

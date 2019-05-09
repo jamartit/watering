@@ -9,11 +9,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WaterFlowJob implements Runnable {
 
+    private SystemContainer systemContainer;
+
+    public WaterFlowJob(SystemContainer systemContainer) {
+        this.systemContainer = systemContainer;
+    }
+
     @Override
     public void run() {
 
-        ExternalDeviceSwitch controlLight = SystemContainer.getInstance().getExternalDeviceByNameEnum(WateringPinNames.CONTROL_LIGHT);
-        WaterFlowDetector waterFlowDetector = SystemContainer.getInstance().getWaterFlowDetector();
+        ExternalDeviceSwitch controlLight = systemContainer.getExternalDeviceByNameEnum(WateringPinNames.CONTROL_LIGHT);
+        WaterFlowDetector waterFlowDetector = systemContainer.getWaterFlowDetector();
         while (true) {
             try {
                 if (waterFlowDetector.isWaterFlowing() && !isLightOn(controlLight)) {

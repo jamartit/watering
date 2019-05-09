@@ -4,6 +4,7 @@ import it.jamart.maniek.garden.watering.enums.WateringPinNames;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Data
 @Slf4j
+@Service
 public class SystemContainer {
 
     private boolean systemActive;
@@ -24,16 +26,6 @@ public class SystemContainer {
     private WaterFlowDetector waterFlowDetector;
 
     private List<ExternalDeviceSwitch> externalDevices = new ArrayList<>();
-
-    private SystemContainer() {
-    }
-
-    public static synchronized SystemContainer getInstance() {
-        if (instance == null) {
-            instance = new SystemContainer();
-        }
-        return instance;
-    }
 
     public synchronized void setAllSections(WateringSection... sections) {
         sectionList.addAll(Arrays.asList(sections));
