@@ -1,12 +1,11 @@
 $(document).ready(function () {
 
     var reloadContent = function () {
-        $("#watering-container").load(location.href + " #watering-container>*", "");
+        window.location.reload(false);
     }
 
     var executeCommand = function (command) {
         $.get(command), function () {
-            reloadContent();
         }
     }
 

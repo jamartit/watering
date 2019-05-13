@@ -61,7 +61,11 @@ public class WateringController {
     @GetMapping("/water/execute")
     public void executeWatering() {
         WateringJob wateringJob = scheduledWatering.getWateringJob();
-        wateringJob.start("per Request");
+        if (!wateringJob.isRunning()) {
+            wateringJob.start("per Request");
+        } else {
+            log.info("watering already running... do nothing");
+        }
     }
 
     @GetMapping("/water/abort")
@@ -149,7 +153,7 @@ public class WateringController {
             return null;
         }
         if (section.isDisabled()) {
-            log.warn("section by given enum: " + sectionEnum.getName() + " is disabled");
+            log.debug("section by given enum: " + sectionEnum.getName() + " is disabled");
             return null;
         }
         return section;

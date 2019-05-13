@@ -39,7 +39,7 @@ public class WateringJob implements Runnable {
     public void start(String name) {
         worker = new Thread(this);
         this.jobName = name;
-        worker.start();
+        worker.run();
     }
 
     public void disable() {
@@ -51,7 +51,7 @@ public class WateringJob implements Runnable {
     }
 
     public void interrupt() {
-        running.set(false);
+        log.info("interrupting");
         worker.interrupt();
     }
 
@@ -63,8 +63,9 @@ public class WateringJob implements Runnable {
     public void run() {
         running.set(true);
 
-        if(!disabled.get()) {
+        if (!disabled.get()) {
             try {
+                log.info("executing watering: " + jobName);
                 executeSection(WateringPinNames.SECTION_1);
                 executeSection(WateringPinNames.SECTION_2);
                 executeSection(WateringPinNames.SECTION_3);
@@ -87,8 +88,10 @@ public class WateringJob implements Runnable {
     private void executeSection(WateringPinNames sectionName) throws InterruptedException {
         WateringSection section = wateringController.resolveSection(sectionName);
         RainDetector rainDetector = systemContainer.getRainDetector();
-        if (section != null && !rainDetector.isRainDetected() && wateringController.turnOnSection(section)) {
-            Thread.sleep(section.getActiveMinutes() * 1000);
+        if (section != null && !rainDetector.isRainDetected()) {
+            log.info("execute: running " + sectionName.getName());
+            wateringController.turnOnSection(section);
+            Thread.sleep(section.getActiveMinutes() * 1000 * 60);
             wateringController.turnOffSection(section);
         }
     }
