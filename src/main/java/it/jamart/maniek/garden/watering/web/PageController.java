@@ -30,7 +30,7 @@ public class PageController {
         model.addAttribute("section4status", wateringController.checkSection(WateringPinNames.SECTION_4.getName()));
         model.addAttribute("section5status", wateringController.checkSection(WateringPinNames.SECTION_5.getName()));
         model.addAttribute("section6status", wateringController.checkSection(WateringPinNames.SECTION_6.getName()));
-        model.addAttribute("section7status", wateringController.checkSection(WateringPinNames.SECTION_6.getName()));
+        model.addAttribute("section7status", wateringController.checkSection(WateringPinNames.SECTION_7.getName()));
         model.addAttribute("section8status", wateringController.checkSection(WateringPinNames.SECTION_8.getName()));
         model.addAttribute("rainstatus", sensorsController.isRainDetected());
         model.addAttribute("waterstatus", sensorsController.isWaterFlowDetected());

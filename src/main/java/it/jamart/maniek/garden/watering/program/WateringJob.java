@@ -89,7 +89,7 @@ public class WateringJob implements Runnable {
         WateringSection section = wateringController.resolveSection(sectionName);
         RainDetector rainDetector = systemContainer.getRainDetector();
         if (section != null && !rainDetector.isRainDetected()) {
-            log.info("execute: running " + sectionName.getName());
+            log.info("execute: running " + sectionName.getName() + " / for: " + section.getActiveMinutes()+" minutes");
             wateringController.turnOnSection(section);
             Thread.sleep(section.getActiveMinutes() * 1000 * 60);
             wateringController.turnOffSection(section);

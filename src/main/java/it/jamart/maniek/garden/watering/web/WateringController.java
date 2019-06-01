@@ -119,25 +119,21 @@ public class WateringController {
 
     public boolean turnOnSection(WateringSection section) {
         boolean result = false;
-        if (!isWatering()) {
-            clearAll();
-            if (section != null) {
-                valvePowerOn();
-                section.getPin().turnOn();
-                result = true;
-            }
+        clearAll();
+        if (section != null) {
+            valvePowerOn();
+            section.getPin().turnOn();
+            result = true;
         }
         return result;
     }
 
     public boolean turnOffSection(WateringSection section) {
         boolean result = false;
-        if (!isWatering()) {
-            if (section != null) {
-                section.getPin().turnOff();
-                valvePowerOff();
-                result = true;
-            }
+        if (section != null) {
+            section.getPin().turnOff();
+            valvePowerOff();
+            result = true;
         }
         return result;
     }
