@@ -61,9 +61,10 @@ public class WateringJob implements Runnable {
 
     @Override
     public void run() {
+        RainDetector rainDetector = systemContainer.getRainDetector();
         running.set(true);
 
-        if (!disabled.get()) {
+        if (!disabled.get() && !rainDetector.isRainDetected()) {
             try {
                 log.info("executing watering: " + jobName);
                 executeSection(WateringPinNames.SECTION_1);
@@ -80,7 +81,7 @@ public class WateringJob implements Runnable {
             }
             wateringController.clearAll();
         } else {
-            log.info("watering disabled");
+            log.info("watering disabled or rain detected");
         }
         running.set(false);
     }

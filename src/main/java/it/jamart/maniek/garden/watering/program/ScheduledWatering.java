@@ -28,7 +28,7 @@ public class ScheduledWatering {
         wateringJob = new WateringJob(wateringController, systemContainer);
     }
 
-    @Scheduled(cron = "0 0 4 * * *")
+    @Scheduled(cron = "0 0 23 * * *")
     public void defaultWatering() {
         log.info("starting scheduled default watering");
         if (!wateringJob.isRunning()) {

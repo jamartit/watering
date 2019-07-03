@@ -35,6 +35,9 @@ public class PageController {
         model.addAttribute("rainstatus", sensorsController.isRainDetected());
         model.addAttribute("waterstatus", sensorsController.isWaterFlowDetected());
         model.addAttribute("mainwateringstatus", wateringController.isWatering());
+        model.addAttribute("jobstatus", wateringController.statusJobWatering());
+
+        model.addAttribute("perMinute", sensorsController.waterRatePerMinute());
 
         return "home";
     }

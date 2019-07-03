@@ -29,4 +29,10 @@ public class SensorsController {
         return waterFlowDetector != null ? waterFlowDetector.isWaterFlowing() : false;
     }
 
+    @GetMapping("/sensor/water-rate")
+    public long waterRatePerMinute() {
+        WaterFlowDetector waterFlowDetector = systemContainer.getWaterFlowDetector();
+        return waterFlowDetector != null ? waterFlowDetector.pulsesPerMinute() : 0;
+    }
+
 }

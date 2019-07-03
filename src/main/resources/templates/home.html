@@ -8,6 +8,7 @@
     <meta name="robots" content="noindex"/>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="${'css/watering.css'}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/watering.js"></script>
@@ -15,15 +16,13 @@
 </head>
 <body>
 
-
-<div>jGarden Wattering</div>
-
 <div class="container-fluid" id="watering-container">
 
     <div>
-        <div style="padding: 5px;" th:text="'Main watering is currently ' + (${mainwateringstatus} ? 'active' : 'inactive')" />
+        <div style="padding: 5px;" th:text="'Main watering status: ' + (${mainwateringstatus} ? 'active' : 'inactive')" />
         <div style="padding: 5px;" th:text="'Watering is currently ' + (${waterstatus} ? '' : 'not') + ' flowing'" />
         <div style="padding: 5px;" th:text="'Rain is ' + (${rainstatus} ? '' : 'not') + ' detected'" />
+        <div style="padding: 5px;" th:text="'job is ' + (${jobstatus} ? 'enabled' : 'disabled') + ''" />
     </div>
 
     <div class="row">
@@ -35,31 +34,35 @@
         </div>
     </div>
 
-    <div class="row">
-        <div style="padding: 5px;" class="col-lg-2 ">
+    <div class="row watering-buttons">
+        <div style="padding: 5px;" class="col-lg-6 col-md-6 col-sm-6">
             <button data-section="section-1" th:class="'sectionBtn  btn ' + (${section1status} ? 'btn-warning' : 'btn-primary')">Section 1</button>
         </div>
-        <div style="padding: 5px;" class="col-lg-2 ">
+        <div style="padding: 5px;" class="col-lg-6 col-md-6 col-sm-6 ">
             <button data-section="section-2" th:class="'sectionBtn  btn ' + (${section2status} ? 'btn-warning' : 'btn-primary')">Section 2</button>
         </div>
-        <div style="padding: 5px;" class="col-lg-2 ">
+        <div style="padding: 5px;" class="col-lg-6 col-md-6 col-sm-6 ">
             <button data-section="section-3" th:class="'sectionBtn  btn ' + (${section3status} ? 'btn-warning' : 'btn-primary')">Section 3</button>
         </div>
-        <div style="padding: 5px;" class="col-lg-2 ">
+        <div style="padding: 5px;" class="col-lg-6 col-md-6 col-sm-6 ">
             <button data-section="section-4" th:class="'sectionBtn  btn ' + (${section4status} ? 'btn-warning' : 'btn-primary')">Section 4</button>
         </div>
-        <div style="padding: 5px;" class="col-lg-2 ">
+        <div style="padding: 5px;" class="col-lg-6 col-md-6 col-sm-6 ">
             <button data-section="section-5" th:class="'sectionBtn  btn ' + (${section5status} ? 'btn-warning' : 'btn-primary')">Section 5</button>
         </div>
-        <div style="padding: 5px;" class="col-lg-2 ">
+        <div style="padding: 5px;" class="col-lg-6 col-md-6 col-sm-6 ">
             <button data-section="section-6" th:class="'sectionBtn  btn ' + (${section6status} ? 'btn-warning' : 'btn-primary')">Section 6</button>
         </div>
-        <div style="padding: 5px;" class="col-lg-2 ">
+        <div style="padding: 5px;" class="col-lg-6 col-md-6 col-sm-6 ">
             <button data-section="section-7" th:class="'sectionBtn  btn ' + (${section7status} ? 'btn-warning' : 'btn-primary')">Section 7</button>
         </div>
-        <div style="padding: 5px;" class="col-lg-2 ">
+        <div style="padding: 5px;" class="col-lg-6 col-md-6 col-sm-6 ">
             <button data-section="section-8" th:class="'sectionBtn  btn ' + (${section8status} ? 'btn-warning' : 'btn-primary')">Section 8</button>
         </div>
+    </div>
+
+    <div>
+        <div style="padding: 5px;" th:text="'water rate per minute: ' + ${perMinute}" />
     </div>
 </div>
 

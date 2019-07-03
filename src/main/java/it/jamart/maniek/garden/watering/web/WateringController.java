@@ -71,7 +71,9 @@ public class WateringController {
     @GetMapping("/water/abort")
     public void abortWatering() {
         WateringJob wateringJob = scheduledWatering.getWateringJob();
-        wateringJob.interrupt();
+        if(wateringJob != null) {
+            wateringJob.interrupt();
+        }
         clearAll();
     }
 
@@ -88,9 +90,9 @@ public class WateringController {
     }
 
     @GetMapping("/water/status")
-    public String statusWatering() {
+    public boolean statusJobWatering() {
         WateringJob wateringJob = scheduledWatering.getWateringJob();
-        return "Status: disabled: " + wateringJob.getDisabled().get() + " / running: " + wateringJob.getRunning().get();
+        return !wateringJob.getDisabled().get();
     }
 
     @GetMapping("/water/is-active")
