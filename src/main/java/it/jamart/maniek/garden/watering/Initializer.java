@@ -22,12 +22,12 @@ public class Initializer implements CommandLineRunner {
     public void run(String... args) {
         systemContainer.setAllSections(
                 new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_21, PinState.HIGH, WateringPinNames.SECTION_1), 10),
-                new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_22, PinState.HIGH, WateringPinNames.SECTION_2), 60),
-                new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_23, PinState.HIGH, WateringPinNames.SECTION_3), 60),
-                new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_27, PinState.HIGH, WateringPinNames.SECTION_4), 60),
+                new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_22, PinState.HIGH, WateringPinNames.SECTION_2), 30),
+                new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_23, PinState.HIGH, WateringPinNames.SECTION_3), 30),
+                new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_27, PinState.HIGH, WateringPinNames.SECTION_4), 30),
                 new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_24, PinState.HIGH, WateringPinNames.SECTION_5), 60),
-                new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_28, PinState.HIGH, WateringPinNames.SECTION_6), 10, true),
-                new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_29, PinState.HIGH, WateringPinNames.SECTION_7), 10),
+                new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_28, PinState.HIGH, WateringPinNames.SECTION_6), 10),
+                new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_29, PinState.HIGH, WateringPinNames.SECTION_7), 30),
                 new WateringSection(new DigitalOutputPin(RaspiPin.GPIO_25, PinState.HIGH, WateringPinNames.SECTION_8), 10)
         );
         systemContainer.setRainDetector(new RainDetector(new DigitalInputPin(RaspiPin.GPIO_01, PinPullResistance.PULL_DOWN, WateringPinNames.RAIN_DETECTOR)));
